@@ -52,7 +52,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-04-28 14:37:42'
+  postUpdate: '2023-04-28 14:46:10'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -173,7 +173,55 @@ window.addEventListener('load',()=> { preloader.endLoading() })
 if (false) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="月胧明"><span class="site-name">月胧明</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Kubernetes学习笔记">Kubernetes学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">汇总k8s学习过程中的笔记
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="月胧明"><span class="site-name">月胧明</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">学习docker过程中的笔记整理
+
+
+安装本地安装12345678910111213141516171819202122232425# install tools for install keysudo apt-get -y install \     apt-transport-https \     ca-certificates \     curl \     gnupg-agent \     software-properties-common # download official docker keycurl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - # verify you have the docker key fingerprintapt-key fingerprint 0EBFCD88 # add docker repoadd-apt-repository \   &quot;deb [arch=amd64] https://download.docker.co ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Golang%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Golang开发环境配置">Golang开发环境配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">Linux下的golang环境安装配置
+
+
+Linux环境安装1234567891011121314#下载wget https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz# 安装rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz#配置环境变量#修改~/.zshrc或~/.bashrc,添加export PATH=$PATH:/usr/local/go/bin#查看是否配置成功go version#输出下列则表示配置成功go version go1.16.3 linux/amd64
+
+配置国内仓库12go env -w GO111MODULE=ongo env -w GOPROXY=https://goproxy.cn,direct
+
+安装gopls代码补全工具1go get -v golang.org/x/tools/gopls
+
+安装gocomplete命令自动补全工具12345go get -u github.com/p ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="Hexo博客搭建教程">Hexo博客搭建教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">1.环境准备
+node.js (node.js安装教程)
+nginx (使用宝塔安装)
+
+2.安装Hexo1npm install hexo-cli -g
+
+3.配置Hexo创建第一个Blog123hexo init blogcd blognpm install
+
+启动1234567891011121314npm install hexo --save#清理hexo clean#生成静态文件hexo ghexo generate#安装部署插件npm install hexo-deployer-git --save#推送远程hexo dhexo deploy#启动服务hexo shexo server
+
+主题配置hexo官方主题仓库地址：https://hexo.io/themes/
+主题推荐：butterfly
+123456#将主题解压至博客的themes目录下tar -zxvf hexo-theme-butterfly-XXX.tar.gz -C themes#修改config.yml#添加或者修改, 和themes目录下的主题目录名一致theme: butterfly
+
+4.发布方 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Hugo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" title="Hugo搭建指南">Hugo搭建指南</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">Hugo是一个基于golang的静态博客框架，和Hexo类似
+安装安装golangHugo是基于go语言开发的，所以需要安装go才能正常运行
+golang的安装配置可参考 Golang开发环境配置
+安装HugoLinux下安装Hugo
+
+Snap
+
+1snap install hugo
+
+
+安装包安装前往官方Github下载安装包
+
+1dpkg -i hugo_extended_0.86.1_Linux-64bit.deb
+
+查看hugo是否安装成功
+123hugo version# 输出hugo v0.86.1-F6821B88+extended linux/amd64 BuildDate=2021-07-30T10:13:35Z VendorInfo=gohugoio
+
+搭建博客新建博客1hugo new site blog
+
+生成一个blog文件夹，就是新建的博客文件夹
+选择主题Hugo的主题相较于Hexo还是偏少，可前往Hugo主题站选择
+下载主题，以hugo-theme-stack为例, 解压至博客根目录下的themes
+1tar -zxvf hugo-theme-stack ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Kubernetes学习笔记">Kubernetes学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">汇总k8s学习过程中的笔记
 
 
 基本概念名词解释Cluster
@@ -188,7 +236,7 @@ Kubernetes 引入 Pod 主要基于下面两个目的：
 
 可管理性
 
-有些容器天生就是需要紧密联系，一起工作。Pod 提供了比容器更高层次的抽象，将它们封装到一个部署单元中。Kubernetes 以 Pod 为最小 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Node.js%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="Node.js安装配置教程">Node.js安装配置教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">Linux下node.js安装配置教程
+有些容器天生就是需要紧密联系，一起工作。Pod 提供了比容器更高层次的抽象，将它们封装到一个部署单元中。Kubernetes 以 Pod 为最小 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Node.js%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="Node.js安装配置教程">Node.js安装配置教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">Linux下node.js安装配置教程
 
 
 安装nvm123456789wget https://raw.githubusercontent.com/nvm-sh/nvm/master/install.shchmod +x install.sh./install.sh #或者curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash #zsh加入插件nvmsource ~/.zshrc
@@ -207,7 +255,7 @@ Kubernetes 引入 Pod 主要基于下面两个目的：
 查看本地版本列表和当前版本
 1nvm list
 
-npm命 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Oh%20My%20Zsh%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Oh My Zsh安装配置">Oh My Zsh安装配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">oh my zsh是zsh的增强工具，有着丰富的插件和主题
+npm命 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Oh%20My%20Zsh%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Oh My Zsh安装配置">Oh My Zsh安装配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">oh my zsh是zsh的增强工具，有着丰富的插件和主题
 
 
 卸载1uninstall_oh_my_zsh
@@ -219,10 +267,10 @@ npm命 ...</div></div></div><div class="recent-post-item"><div class="recent-pos
 
 插件与主题(自用)路径12/home/.zshrc/root/.zshrc
 
-插件zsh-syntax-highlighting123git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custo ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Pulseaudio%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" title="Pulseaudio开发笔记">Pulseaudio开发笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">pulseaudio是Linux下常用的音频框架，使用pa接口进行开发。
+插件zsh-syntax-highlighting123git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custo ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Pulseaudio%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" title="Pulseaudio开发笔记">Pulseaudio开发笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">pulseaudio是Linux下常用的音频框架，使用pa接口进行开发。
 
 
-一、连接至pulse服务123456789101112131415161718192021222324252627282930313233343536373839void context_state_callback(pa_context *c, void *userdata) &#123;    g_assert(c);    switch (pa_context_get_state(c)) &#123;        case PA_CONTEXT_UNCONNECTED:        case PA_CONTEXT_CONNECTING:        case PA_CONTEXT_AUTHORIZING:        case PA_CONTEXT_SETTING_NAME:            break;         case PA_CONTEXT_READY: &#123;         &#125;        case PA_CONTEXT_FAILED: &#123;    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Systemd%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" title="Systemd基本教程">Systemd基本教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">systemd是Linux电脑操作系统之下的一套中央化系统及设置管理程序，包括有守护进程、程序库以及应用软件。
+一、连接至pulse服务123456789101112131415161718192021222324252627282930313233343536373839void context_state_callback(pa_context *c, void *userdata) &#123;    g_assert(c);    switch (pa_context_get_state(c)) &#123;        case PA_CONTEXT_UNCONNECTED:        case PA_CONTEXT_CONNECTING:        case PA_CONTEXT_AUTHORIZING:        case PA_CONTEXT_SETTING_NAME:            break;         case PA_CONTEXT_READY: &#123;         &#125;        case PA_CONTEXT_FAILED: &#123;    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/Systemd%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" title="Systemd基本教程">Systemd基本教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">systemd是Linux电脑操作系统之下的一套中央化系统及设置管理程序，包括有守护进程、程序库以及应用软件。
 
 
 常用命令1234567891011121314151617181920#列出所有已加载的单元systemctl list-units#查看指定的单元的配置systemctl cat [serviceName]#修改指定单元的配置systemctl edit [serviceName]#启动/重启/停止指定单元systemctl start/restart/stop [serviceName]#查看指定单元状态systemctl status [serviceName]#启用/禁止指定单元systemctl enable/disable [serviceName]#重载配置systemctl daemon-reload
@@ -234,63 +282,9 @@ Documentation: 文档位置（以空格分隔）
 
 
 Before: 在哪些服务之前启动
-本字段不涉及依赖关系 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="frp内网穿透">frp内网穿透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">frp 是一个高性能的反向代理应用，可以进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型。
+本字段不涉及依赖关系 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="frp内网穿透">frp内网穿透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></span></div><div class="content">frp 是一个高性能的反向代理应用，可以进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型。
 
 
 frp服务端安装配置1234567891011121314#下载解压tar -zxvf frp.xxx.tar.gz #安装cd frp.xxxcp frps /usr/bin/cp frps.ini /etc/frp/ #设置开机启动cp systemd/frps.service /usr/lib/systemd/system/systemctl enable frps.service #启动systemctl start frps.service
 
-配置文件参数123456789101112131415161718192021222324252627282930313233343536373839[common]bind_addr = 0.0.0.0 #绑定IPbind_port = 7000   #绑定端口bind_udp_port = 7001 #绑定udp端口 # 仪表盘# IP 与 bind_addr 默认相同，可以不设置# dashboard_ad ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/%E4%BD%BF%E7%94%A8CUnit%E8%BF%9B%E8%A1%8CC%E6%8E%A5%E5%8F%A3%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" title="使用CUnit进行C接口单元测试">使用CUnit进行C接口单元测试</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">CUnit （单元测试框架），CUnit是一个用C语言编写、管理和运行单元测试的轻量级系统，它为C程序员提供了具有灵活多样用户界面的基本测试功能。
-
-
-环境安装12345# 普通版本apt install libcunit1 libcunit1-dev# ncurses版本apt install libcunit1-ncurses libcunit1-ncurses-dev
-
-四种模式输出简介
-
-
-模式
-平台
-结果输出方式
-使用的接口函数
-介绍
-
-
-
-Basic
-所有
-标准输出
-#include “CUnit&#x2F;Basic.h”CU_basic_set_mode(CU_BRM_VERBOSE);CU_basic_run_tests();
-结果输出到标准输出（stdout）
-
-
-Automated
-所有
-xml文件
-#include “CUnit&#x2F;Automated.h”CU_set_output_filename(“result”); CU_list_tests_to_file();CU_automated_run_tests();
-生成XML文件
-
-
-Console ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/%E4%BD%BF%E7%94%A8lsyncd%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/" title="使用lsyncd自动同步">使用lsyncd自动同步</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">lsyncd可监测文件夹改变并自动同步
-
-
-安装1sudo apt-get install lsyncd
-
-同步本地文件夹vim &#x2F;etc&#x2F;lsyncd&#x2F;lsyncd.conf
-123456789101112131415161718192021222324252627282930settings &#123;    logfile      = &quot;/var/log/lsyncd/lsyncd.log&quot;,    statusFile   = &quot;/var/log/lsyncd/lsyncd.status&quot;,    #触发条件    inotifyMode  = &quot;CloseWrite or Modify&quot;,    #最大同步线程    maxProcesses = 8,&#125; sync &#123;    #本地同步使用rsync    default.rsync,    #源文件夹    source    = &quot;/www/wwwroot/FileRun/data/&quot;,   ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%8C%82%E8%BD%BD/" title="对象存储挂载">对象存储挂载</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">腾讯云cos和阿里云oos对象存储挂载到服务器上，当做额外硬盘
-
-
-cos挂载配置1. 安装依赖包
-12345#Ubuntusudo apt-get install automake autotools-dev g++ git libcurl4-gnutls-dev libfuse-dev libssl-dev libxml2-dev make pkg-config fuse#centossudo yum install automake gcc-c++ git libcurl-devel libxml2-devel fuse-devel make openssl-devel fuse
-
-2. 编译安装
-12345678git clone https://github.com/tencentyun/cosfs /usr/cosfscd /usr/cosfs./autogen.sh./configuremakesudo make install#查看版本cosfs --version
-
-3. 配置密钥
-12echo &lt;BucketName-APPID&gt;:&lt;SecretI ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/28/%E6%8E%88%E6%9D%83%E7%A8%8B%E5%BA%8FPolkit%E6%95%99%E7%A8%8B/" title="授权程序Polkit教程">授权程序Polkit教程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="content">
-polkit 是一个应用程序级工具包，用于定义和处理允许非特权进程与特权进程对话的策略：它是一个框架，用于集中决策过程，以授予非特权应用程序对特权操作的访问权限。Polkit 用于控制系统范围的权限。它为非特权进程与特权进程通信提供了一种有组织的方式。与 sudo 等系统相比，它不会向整个进程授予 root 权限，而是允许对集中式系统策略进行更精细的控制。
-
-
-
-配置文件Actions:/usr/share/polkit-1/action
-Authorization rules:/usr/share/polkit-1/rules.d or /etc/polkit-1/rules.d
-Actions模版：
-12345678910111213141516171819202122232425&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE policyconfig PUBLIC &quot;-//freedesktop//DTD PolicyKit Policy Configuratio ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JKlash</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/jk1ash"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Kubernetes学习笔记">Kubernetes学习笔记</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Node.js%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="Node.js安装配置教程">Node.js安装配置教程</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Oh%20My%20Zsh%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Oh My Zsh安装配置">Oh My Zsh安装配置</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Pulseaudio%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" title="Pulseaudio开发笔记">Pulseaudio开发笔记</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Systemd%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" title="Systemd基本教程">Systemd基本教程</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">14</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">14</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-28T06:37:42.275Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By JKlash</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+配置文件参数123456789101112131415161718192021222324252627282930313233343536373839[common]bind_addr = 0.0.0.0 #绑定IPbind_port = 7000   #绑定端口bind_udp_port = 7001 #绑定udp端口 # 仪表盘# IP 与 bind_addr 默认相同，可以不设置# dashboard_ad ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JKlash</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/jk1ash"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">Docker学习笔记</a><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Golang%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Golang开发环境配置">Golang开发环境配置</a><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="Hexo博客搭建教程">Hexo博客搭建教程</a><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Hugo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/" title="Hugo搭建指南">Hugo搭建指南</a><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Kubernetes学习笔记">Kubernetes学习笔记</a><time datetime="2023-04-28T06:45:41.497Z" title="发表于 2023-04-28 14:45:41">2023-04-28</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">14</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">14</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-04-28T06:46:10.027Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By JKlash</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
