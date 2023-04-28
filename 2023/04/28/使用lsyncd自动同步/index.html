@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>使用lsyncd自动同步 | 月胧明</title><meta name="author" content="JKlash"><meta name="copyright" content="JKlash"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lsyncd可监测文件夹改变并自动同步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用lsyncd自动同步">
+<meta property="og:url" content="https://blog.jklash.com/2023/04/28/%E4%BD%BF%E7%94%A8lsyncd%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="月胧明">
+<meta property="og:description" content="lsyncd可监测文件夹改变并自动同步">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg">
+<meta property="article:published_time" content="2023-04-28T06:37:18.416Z">
+<meta property="article:modified_time" content="2023-04-28T06:37:18.416Z">
+<meta property="article:author" content="JKlash">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg"><link rel="shortcut icon" href="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2022/04/07/624e89b5cc0fe.png"><link rel="canonical" href="https://blog.jklash.com/2023/04/28/%E4%BD%BF%E7%94%A8lsyncd%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用lsyncd自动同步',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-28 14:37:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="月胧明"><span class="site-name">月胧明</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">使用lsyncd自动同步</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-28T06:37:18.416Z" title="更新于 2023-04-28 14:37:18">2023-04-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="使用lsyncd自动同步"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>lsyncd可监测文件夹改变并自动同步</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install lsyncd</span><br></pre></td></tr></table></figure>
+
+<h2 id="同步本地文件夹"><a href="#同步本地文件夹" class="headerlink" title="同步本地文件夹"></a>同步本地文件夹</h2><p>vim &#x2F;etc&#x2F;lsyncd&#x2F;lsyncd.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">settings &#123;</span><br><span class="line">    logfile      = &quot;/var/log/lsyncd/lsyncd.log&quot;,</span><br><span class="line">    statusFile   = &quot;/var/log/lsyncd/lsyncd.status&quot;,</span><br><span class="line">    #触发条件</span><br><span class="line">    inotifyMode  = &quot;CloseWrite or Modify&quot;,</span><br><span class="line">    #最大同步线程</span><br><span class="line">    maxProcesses = 8,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">sync &#123;</span><br><span class="line">    #本地同步使用rsync</span><br><span class="line">    default.rsync,</span><br><span class="line">    #源文件夹</span><br><span class="line">    source    = &quot;/www/wwwroot/FileRun/data/&quot;,</span><br><span class="line">    #目标文件夹</span><br><span class="line">    target    = &quot;/mnt/cosfs/&quot;,</span><br><span class="line">    #同步间隔</span><br><span class="line">    delay     = 1,</span><br><span class="line">    #删除目标目录比源目录多余的文件</span><br><span class="line">    delete = true,</span><br><span class="line">    #过滤列表</span><br><span class="line">    excludeFrom = &quot;/etc/lsyncd/exclude.list&quot;,</span><br><span class="line">    #rsync设置</span><br><span class="line">    rsync     = &#123;</span><br><span class="line">        binary    = &quot;/usr/bin/rsync&quot;,</span><br><span class="line">        archive   = true,</span><br><span class="line">        compress = false,</span><br><span class="line">        verbose   = true</span><br><span class="line">        &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="同步远程文件夹"><a href="#同步远程文件夹" class="headerlink" title="同步远程文件夹"></a>同步远程文件夹</h2><p>需先配置ssh免密登陆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@host</span><br></pre></td></tr></table></figure>
+
+<p>配置lsyncd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">settings &#123;</span><br><span class="line">    logfile      = &quot;/var/log/lsyncd/lsyncd.log&quot;,</span><br><span class="line">    statusFile   = &quot;/var/log/lsyncd/lsyncd.status&quot;,</span><br><span class="line">    inotifyMode  = &quot;CloseWrite or Modify&quot;,</span><br><span class="line">    maxProcesses = 8,</span><br><span class="line">&#125;</span><br><span class="line">sync &#123;</span><br><span class="line">    default.rsyncssh,</span><br><span class="line">    source = &quot;/root/Downloads/&quot;,</span><br><span class="line">    host = &quot;root@159.75.91.213&quot;,</span><br><span class="line">    targetdir = &quot;/www/wwwroot/FileRun/data/aria2-downloads/&quot;,</span><br><span class="line">    delay = 1,</span><br><span class="line">    rsync = &#123;</span><br><span class="line">        binary = &quot;/usr/bin/rsync&quot;,</span><br><span class="line">        archive = true,</span><br><span class="line">        compress = true,</span><br><span class="line">        perms = true,</span><br><span class="line">        whole_file = false</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="lsyncd参数详解"><a href="#lsyncd参数详解" class="headerlink" title="lsyncd参数详解"></a>lsyncd参数详解</h2><p>全局设置，即settings</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>类型</th>
+<th>描述</th>
+<th>例子</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>logfile</td>
+<td>string</td>
+<td>日志文件路径</td>
+<td>“&#x2F;var&#x2F;log&#x2F;lsyncd.log”</td>
+<td>none</td>
+</tr>
+<tr>
+<td>pidfile</td>
+<td>string</td>
+<td>pid文件路径</td>
+<td>“&#x2F;tmp&#x2F;lsyncd.pid”</td>
+<td>none</td>
+</tr>
+<tr>
+<td>statusFile</td>
+<td>string</td>
+<td>状态文件路径</td>
+<td>“&#x2F;tmp&#x2F;lsyncd.status”</td>
+<td>nome</td>
+</tr>
+<tr>
+<td>nodaemon</td>
+<td>bool</td>
+<td>是否是前台模式</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>statusInterval</td>
+<td>int</td>
+<td>写入状态文件延迟</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>insist</td>
+<td>bool</td>
+<td>是否开启容错模式</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>inotifyMode</td>
+<td>string</td>
+<td>指定监控事件</td>
+<td>“CloseWrite” or “CloseWrite or Modify”</td>
+<td>“CloseWrite”</td>
+</tr>
+<tr>
+<td>maxProcesses</td>
+<td>int</td>
+<td>最大同步进程数</td>
+<td>8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>maxDelays</td>
+<td>int</td>
+<td>最大同步文件数</td>
+<td>1000</td>
+<td>1000</td>
+</tr>
+</tbody></table>
+<p>sync设置，可设置多个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">default.rsync ：</span><br><span class="line">  使用rsync进行本地目录间同步，或使用rsync的ssh形式进行远程同步，</span><br><span class="line">  或使用rsync的daemon方式进行远程同步（需要目标主机也安装rsync）</span><br><span class="line"> </span><br><span class="line">default.direct ：</span><br><span class="line">  本地目录间同步，使用cp、rm等命令完成差异文件备份</span><br><span class="line"> </span><br><span class="line">default.rsyncssh ：</span><br><span class="line">  同步到远程主机目录,使用rsync的ssh模式，需要先配置ssh免密登录（密钥登录）</span><br><span class="line"> </span><br><span class="line">source：</span><br><span class="line">  同步的源目录，使用绝对路径。</span><br><span class="line"> </span><br><span class="line">target：</span><br><span class="line">  目标地址，仅用于direct, rsync模式, 对应不同的模式有几种写法例如</span><br><span class="line">  1. /tmp/dest</span><br><span class="line">    本地目录同步  root@172.16.1.31:/opt/</span><br><span class="line">    使用远程shell(如rsh、ssh) 同步到远程服务器目录，</span><br><span class="line">    root@可以省略，默认是root用户 。用于rsync模式。</span><br><span class="line">  2. root@172.29.88.223::var/back</span><br><span class="line">    使用rsync的daemon模式同步到远程服务器目录，目标主机也需要安装rsync。</span><br><span class="line">    var/back等于/var/back，root@可以省略，默认是root用户。</span><br><span class="line">    用于rsync模式。</span><br><span class="line"> </span><br><span class="line">targetdir</span><br><span class="line">  目标地址，仅用于rsyncssh模式，例如：/tmp/dest</span><br><span class="line"> </span><br><span class="line">init</span><br><span class="line">  当init = false，只同步进程启动以后发生改动事件的文件，原有的目录即使有差异也不会同步。</span><br><span class="line">  默认是true</span><br><span class="line"> </span><br><span class="line">delay</span><br><span class="line">  等待rsync同步延时时间，默认15秒（最大累计到1000个不可合并的事件</span><br><span class="line">  （settings中的maxDelays，默认1000）。也就是15s内监控目录下发生的改动，</span><br><span class="line">  会累积到一次rsync同步，避免过于频繁的同步。</span><br><span class="line">  （可合并的意思是，15s内两次修改了同一文件，最后只同步最新的文件）</span><br><span class="line"> </span><br><span class="line">excludeFrom</span><br><span class="line">  从文件加载排除规则，如excludeFrom = &quot;/etc/lsyncd.exclude&quot;</span><br><span class="line"> </span><br><span class="line">exclude</span><br><span class="line">  从字符串加载排除规则，如exclude = &#123; &#x27;*.bak&#x27; , &#x27;*.tmp&#x27; &#125;</span><br><span class="line"> </span><br><span class="line">这里的规则写法与原生rsync有点不同，更为简单：</span><br><span class="line">如果规则以斜线/开头，则从头开始要匹配全部</span><br><span class="line">如果规则以/结尾，则要匹配监控路径的末尾</span><br><span class="line">?匹配任何字符，但不包括/</span><br><span class="line">*匹配0或多个字符，但不包括/</span><br><span class="line">**匹配0或多个字符，可以是/</span><br><span class="line"> </span><br><span class="line">delete</span><br><span class="line">  为了保持target与souce完全同步，Lsyncd默认会delete = true来允许同步删除。</span><br><span class="line">  它除了false，还有startup、running值。</span><br><span class="line">  false</span><br><span class="line">    Lsyncd不会删除目标上的任何文件。既不在启动时也不在正常运行时。（但是可能会覆盖）</span><br><span class="line">&#x27;startup&#x27;</span><br><span class="line">    Lsyncd在启动时会删除目标上的文件，但在正常运行时不会删除。</span><br><span class="line">&#x27;running&#x27;</span><br><span class="line">    Lsyncd在启动时不会删除目标上的文件，但会删除在正常操作过程中删除的文件。</span><br><span class="line"> </span><br><span class="line">rsync</span><br><span class="line">  配置rsync的命令行参数。 rsync参数太多了，大家看下官方文档把。</span><br><span class="line">  仅适用于，default.rsyncssh和default.rsync模式</span><br><span class="line"> </span><br><span class="line">host</span><br><span class="line">  远程主机地址，例如: 192.168.1.1 或者 zhai@192.168.8.1.1</span><br><span class="line"> </span><br><span class="line">ssh</span><br><span class="line">  配置ssh参数，例如端口：port=1234</span><br></pre></td></tr></table></figure>
+
+<h2 id="rsync参数详解"><a href="#rsync参数详解" class="headerlink" title="rsync参数详解"></a>rsync参数详解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">-v, --verbose 详细模式输出。</span><br><span class="line">-q, --quiet 精简输出模式。</span><br><span class="line">-c, --checksum 打开校验开关，强制对文件传输进行校验。</span><br><span class="line">-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD。</span><br><span class="line">-r, --recursive 对子目录以递归模式处理。 -R, --relative 使用相对路径信息。</span><br><span class="line">-b, --backup 创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。</span><br><span class="line">--backup-dir 将备份文件(如~filename)存放在在目录下。</span><br><span class="line">-suffix=SUFFIX 定义备份文件前缀。</span><br><span class="line">-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件，不覆盖更新的文件。</span><br><span class="line">-l, --links 保留软链结。</span><br><span class="line">-L, --copy-links 想对待常规文件一样处理软链结。</span><br><span class="line">--copy-unsafe-links 仅仅拷贝指向SRC路径目录树以外的链结。</span><br><span class="line">--safe-links 忽略指向SRC路径目录树以外的链结。</span><br><span class="line">-H, --hard-links 保留硬链结。</span><br><span class="line">-p, --perms 保持文件权限。</span><br><span class="line">-o, --owner 保持文件属主信息。</span><br><span class="line">-g, --group 保持文件属组信息。</span><br><span class="line">-D, --devices 保持设备文件信息。</span><br><span class="line">-t, --times 保持文件时间信息。</span><br><span class="line">-S, --sparse 对稀疏文件进行特殊处理以节省DST的空间。</span><br><span class="line">-n, --dry-run现实哪些文件将被传输。</span><br><span class="line">-w, --whole-file 拷贝文件，不进行增量检测。</span><br><span class="line">-x, --one-file-system 不要跨越文件系统边界。</span><br><span class="line">-B, --block-size=SIZE 检验算法使用的块尺寸，默认是700字节。</span><br><span class="line">-e, --rsh=command 指定使用rsh、ssh方式进行数据同步。</span><br><span class="line">--rsync-path=PATH 指定远程服务器上的rsync命令所在路径信息。</span><br><span class="line">-C, --cvs-exclude 使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件。</span><br><span class="line">--existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件。</span><br><span class="line">--delete 删除那些DST中SRC没有的文件。</span><br><span class="line">--delete-excluded 同样删除接收端那些被该选项指定排除的文件。</span><br><span class="line">--delete-after 传输结束以后再删除。</span><br><span class="line">--ignore-errors 及时出现IO错误也进行删除。</span><br><span class="line">--max-delete=NUM 最多删除NUM个文件。</span><br><span class="line">--partial 保留那些因故没有完全传输的文件，以是加快随后的再次传输。</span><br><span class="line">--force 强制删除目录，即使不为空。</span><br><span class="line">--numeric-ids 不将数字的用户和组id匹配为用户名和组名。</span><br><span class="line">--timeout=time ip超时时间，单位为秒。</span><br><span class="line">-I, --ignore-times 不跳过那些有同样的时间和长度的文件。</span><br><span class="line">--size-only 当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间。</span><br><span class="line">--modify-window=NUM 决定文件是否时间相同时使用的时间戳窗口，默认为0。</span><br><span class="line">-T --temp-dir=DIR 在DIR中创建临时文件。</span><br><span class="line">--compare-dest=DIR 同样比较DIR中的文件来决定是否需要备份。</span><br><span class="line">-P 等同于 --partial。</span><br><span class="line">--progress 显示备份过程。</span><br><span class="line">-z, --compress 对备份的文件在传输时进行压缩处理。</span><br><span class="line">--exclude=PATTERN 指定排除不需要传输的文件模式。</span><br><span class="line">--include=PATTERN 指定不排除而需要传输的文件模式。</span><br><span class="line">--exclude-from=FILE 排除FILE中指定模式的文件。</span><br><span class="line">--include-from=FILE 不排除FILE指定模式匹配的文件。</span><br><span class="line">--version 打印版本信息。</span><br><span class="line">--address 绑定到特定的地址。</span><br><span class="line">--config=FILE 指定其他的配置文件，不使用默认的rsyncd.conf文件。</span><br><span class="line">--port=PORT 指定其他的rsync服务端口。</span><br><span class="line">--blocking-io 对远程shell使用阻塞IO。</span><br><span class="line">-stats 给出某些文件的传输状态。</span><br><span class="line">--progress 在传输时现实传输过程。</span><br><span class="line">--log-format=formAT 指定日志文件格式。</span><br><span class="line">--password-file=FILE 从FILE中得到密码。</span><br><span class="line">--bwlimit=KBPS 限制I/O带宽，KBytes per second。</span><br><span class="line">-h, --help 显示帮助信息。</span><br></pre></td></tr></table></figure>
+
+<h2 id="aria2同步"><a href="#aria2同步" class="headerlink" title="aria2同步"></a>aria2同步</h2><p>aria2下载过程中，为了防止下载临时文件也sync，做出以下设置</p>
+<p>创建一个临时目录Downloads和一个最终文件目录Backup</p>
+<p>aria2.conf添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dir=/root/Downloads</span><br><span class="line">on-download-complete=/etc/aria2/aria2-done.sh</span><br></pre></td></tr></table></figure>
+
+<p>aria2-done.sh脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">mv /root/Downloads/* /root/Backup/</span><br><span class="line">chmod 777 /root/Backup/*</span><br><span class="line">rm /root/Downloads/* -rf</span><br></pre></td></tr></table></figure>
+
+<p>chmod +x &#x2F;etc&#x2F;aria2&#x2F;aria2-done.sh</p>
+<p>lsyncd同步目录选择Backup</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.jklash.com">JKlash</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.jklash.com/2023/04/28/%E4%BD%BF%E7%94%A8lsyncd%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/">https://blog.jklash.com/2023/04/28/%E4%BD%BF%E7%94%A8lsyncd%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.jklash.com" target="_blank">月胧明</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/28/%E4%BD%BF%E7%94%A8CUnit%E8%BF%9B%E8%A1%8CC%E6%8E%A5%E5%8F%A3%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" title="使用CUnit进行C接口单元测试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">使用CUnit进行C接口单元测试</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/28/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%8C%82%E8%BD%BD/" title="对象存储挂载"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">对象存储挂载</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/bec7cc186cc9a.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JKlash</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/jk1ash"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.</span> <span class="toc-text">同步本地文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">3.</span> <span class="toc-text">同步远程文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lsyncd%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">lsyncd参数详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rsync%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">rsync参数详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aria2%E5%90%8C%E6%AD%A5"><span class="toc-number">6.</span> <span class="toc-text">aria2同步</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Kubernetes学习笔记">Kubernetes学习笔记</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Node.js%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="Node.js安装配置教程">Node.js安装配置教程</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Oh%20My%20Zsh%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Oh My Zsh安装配置">Oh My Zsh安装配置</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Pulseaudio%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" title="Pulseaudio开发笔记">Pulseaudio开发笔记</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/28/Systemd%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" title="Systemd基本教程">Systemd基本教程</a><time datetime="2023-04-28T06:37:18.416Z" title="发表于 2023-04-28 14:37:18">2023-04-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By JKlash</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
