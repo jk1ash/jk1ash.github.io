@@ -3,8 +3,6 @@ name: Deploy to Github Pages
 on:
     push:
         branches: [master]
-    pull_request:
-        branches: [master]
 
 jobs:
     build:
@@ -47,3 +45,18 @@ jobs:
                   folder: public
                   clean: true
                   single-commit: true
+               
+            - name: Publish
+            env:
+                USER: jk1ash
+                EMAIL: wjj@jklash.com
+                GH_REF: github.com/jk1ash/jk1ash.github.io.git
+                GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            run: |
+                cd public
+                git config --global user.name "$USER"
+                git config --global user.email "$EMAIL"
+                export TZ='Asia/Shanghai'
+                git add .
+                git commit --allow-empty -m "Auto Update: `date +'%Y-%m-%d %H:%M:%S'`"
+                git push "https://$USER:$GH_TOKEN@$GH_REF" master:master
