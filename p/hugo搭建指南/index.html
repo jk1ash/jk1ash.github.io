@@ -1,0 +1,490 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='Hugo是一个基于golang的静态博客框架，和Hexo类似\n安装 安装golang Hugo是基于go语言开发的，所以需要安装go才能正常运行\n安装Hugo Linux下安装Hugo\nSnap 1 snap install hugo 安装包安装 前往官方Github下载安装包 1 dpkg -i hugo_extended_0.86.1_Linux-64bit.deb 查看hugo是否安装成功\n1 2 3 hugo version # 输出 hugo v0.86.1-F6821B88+extended linux/amd64 BuildDate=2021-07-30T10:13:35Z VendorInfo=gohugoio 搭建博客 新建博客 1 hugo new site blog 生成一个blog文件夹，就是新建的博客文件夹\n选择主题 Hugo的主题相较于Hexo还是偏少，可前往Hugo主题站选择\n下载主题，以[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)为例, 解压至博客根目录下的themes\n1 tar -zxvf hugo-theme-stack-3.11.0.tar.gz -C themes/hugo-themes-stack 修改config.toml\n1 theme = "hugo-theme-stack" # 主题名称，要与主题目录下的文件夹名称一致 主题的功能相关配置可查看themes/hugo-theme-stack/exampleSite/config.toml，将配置项复制到根目录的config.toml即可生效\n编辑文章 1 2 3 # 新建博客文件 hugo new posts/My-First-Post.md # 在content/posts下生成My-First-Post.md文件进行编辑即可 修改默认模版:\n'><title>Hugo搭建指南</title>
+<link rel=canonical href=https://blog.jklash.com/p/hugo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Hugo搭建指南"><meta property='og:description' content='Hugo是一个基于golang的静态博客框架，和Hexo类似\n安装 安装golang Hugo是基于go语言开发的，所以需要安装go才能正常运行\n安装Hugo Linux下安装Hugo\nSnap 1 snap install hugo 安装包安装 前往官方Github下载安装包 1 dpkg -i hugo_extended_0.86.1_Linux-64bit.deb 查看hugo是否安装成功\n1 2 3 hugo version # 输出 hugo v0.86.1-F6821B88+extended linux/amd64 BuildDate=2021-07-30T10:13:35Z VendorInfo=gohugoio 搭建博客 新建博客 1 hugo new site blog 生成一个blog文件夹，就是新建的博客文件夹\n选择主题 Hugo的主题相较于Hexo还是偏少，可前往Hugo主题站选择\n下载主题，以[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)为例, 解压至博客根目录下的themes\n1 tar -zxvf hugo-theme-stack-3.11.0.tar.gz -C themes/hugo-themes-stack 修改config.toml\n1 theme = "hugo-theme-stack" # 主题名称，要与主题目录下的文件夹名称一致 主题的功能相关配置可查看themes/hugo-theme-stack/exampleSite/config.toml，将配置项复制到根目录的config.toml即可生效\n编辑文章 1 2 3 # 新建博客文件 hugo new posts/My-First-Post.md # 在content/posts下生成My-First-Post.md文件进行编辑即可 修改默认模版:\n'><meta property='og:url' content='https://blog.jklash.com/p/hugo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/'><meta property='og:site_name' content='月胧明'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Blog'><meta property='article:published_time' content='2023-01-01T00:00:00+00:00'><meta property='article:modified_time' content='2023-01-01T00:00:00+00:00'><meta name=twitter:title content="Hugo搭建指南"><meta name=twitter:description content='Hugo是一个基于golang的静态博客框架，和Hexo类似\n安装 安装golang Hugo是基于go语言开发的，所以需要安装go才能正常运行\n安装Hugo Linux下安装Hugo\nSnap 1 snap install hugo 安装包安装 前往官方Github下载安装包 1 dpkg -i hugo_extended_0.86.1_Linux-64bit.deb 查看hugo是否安装成功\n1 2 3 hugo version # 输出 hugo v0.86.1-F6821B88+extended linux/amd64 BuildDate=2021-07-30T10:13:35Z VendorInfo=gohugoio 搭建博客 新建博客 1 hugo new site blog 生成一个blog文件夹，就是新建的博客文件夹\n选择主题 Hugo的主题相较于Hexo还是偏少，可前往Hugo主题站选择\n下载主题，以[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)为例, 解压至博客根目录下的themes\n1 tar -zxvf hugo-theme-stack-3.11.0.tar.gz -C themes/hugo-themes-stack 修改config.toml\n1 theme = "hugo-theme-stack" # 主题名称，要与主题目录下的文件夹名称一致 主题的功能相关配置可查看themes/hugo-theme-stack/exampleSite/config.toml，将配置项复制到根目录的config.toml即可生效\n编辑文章 1 2 3 # 新建博客文件 hugo new posts/My-First-Post.md # 在content/posts下生成My-First-Post.md文件进行编辑即可 修改默认模版:\n'><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu4410300129322454102.png width=300 height=301 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🌙</span></figure><div class=site-meta><h1 class=site-name><a href=/>月胧明</a></h1><h2 class=site-description>月明星稀，乌鹊南飞</h2></div></header><ol class=menu-social><li><a href=https://github.com/jk1ash target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#安装>安装</a><ol><li><a href=#安装golang>安装golang</a></li><li><a href=#安装hugo>安装Hugo</a></li></ol></li><li><a href=#搭建博客>搭建博客</a><ol><li><a href=#新建博客>新建博客</a></li><li><a href=#选择主题>选择主题</a></li><li><a href=#编辑文章>编辑文章</a></li><li><a href=#本地测试>本地测试</a></li><li><a href=#编译发布>编译发布</a></li></ol></li><li><a href=#使用algolia搜索进行博客内容搜索>使用algolia搜索进行博客内容搜索</a></li><li><a href=#hugo-theme-stack主题美化>hugo-theme-stack主题美化</a><ol><li><a href=#添加回到顶部按钮>添加回到顶部按钮</a></li><li><a href=#加载动画>加载动画</a></li><li><a href=#美化滚动条>美化滚动条</a></li></ol></li><li><a href=#使用github-action自动发布>使用GitHub Action自动发布</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/2023/>2023</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/hugo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/>Hugo搭建指南</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 01, 2023</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><p>Hugo是一个基于golang的静态博客框架，和Hexo类似</p><h2 id=安装>安装</h2><h3 id=安装golang>安装golang</h3><p>Hugo是基于go语言开发的，所以需要安装go才能正常运行</p><h3 id=安装hugo>安装Hugo</h3><p>Linux下安装Hugo</p><ol><li>Snap</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>snap install hugo
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>安装包安装
+前往官方<a class=link href=https://github.com/gohugoio/hugo target=_blank rel=noopener>Github</a>下载安装包</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>dpkg -i hugo_extended_0.86.1_Linux-64bit.deb
+</span></span></code></pre></td></tr></table></div></div><p>查看hugo是否安装成功</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hugo version
+</span></span><span class=line><span class=cl><span class=c1># 输出</span>
+</span></span><span class=line><span class=cl>hugo v0.86.1-F6821B88+extended linux/amd64 <span class=nv>BuildDate</span><span class=o>=</span>2021-07-30T10:13:35Z <span class=nv>VendorInfo</span><span class=o>=</span>gohugoio
+</span></span></code></pre></td></tr></table></div></div><h2 id=搭建博客>搭建博客</h2><h3 id=新建博客>新建博客</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hugo new site blog
+</span></span></code></pre></td></tr></table></div></div><p>生成一个blog文件夹，就是新建的博客文件夹</p><h3 id=选择主题>选择主题</h3><p>Hugo的主题相较于Hexo还是偏少，可前往<a class=link href=https://themes.gohugo.io target=_blank rel=noopener>Hugo主题站</a>选择</p><p>下载主题，以[<a class=link href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener>hugo-theme-stack</a>](<a class=link href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener>https://github.com/CaiJimmy/hugo-theme-stack</a>)为例, 解压至博客根目录下的themes</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>tar -zxvf hugo-theme-stack-3.11.0.tar.gz -C themes/hugo-themes-stack
+</span></span></code></pre></td></tr></table></div></div><p>修改<code>config.toml</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;hugo-theme-stack&#34;</span> <span class=c># 主题名称，要与主题目录下的文件夹名称一致</span>
+</span></span></code></pre></td></tr></table></div></div><p>主题的功能相关配置可查看<code>themes/hugo-theme-stack/exampleSite/config.toml</code>，将配置项复制到根目录的<code>config.toml</code>即可生效</p><h3 id=编辑文章>编辑文章</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 新建博客文件</span>
+</span></span><span class=line><span class=cl>hugo new posts/My-First-Post.md 
+</span></span><span class=line><span class=cl><span class=c1># 在content/posts下生成My-First-Post.md文件进行编辑即可</span>
+</span></span></code></pre></td></tr></table></div></div><p>修改默认模版:</p><p>修改<code>archetypes/default.md</code>文件，可自定义模版，下次新建博客文件即可生效</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>title: &#34;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#34;
+</span></span><span class=line><span class=cl>date: {{ .Date }}
+</span></span><span class=line><span class=cl>draft: false # ture为草稿，false为正式发布
+</span></span><span class=line><span class=cl>author: # 作者
+</span></span><span class=line><span class=cl>tags: # 标签
+</span></span><span class=line><span class=cl>categories: # 类别 
+</span></span><span class=line><span class=cl>---
+</span></span></code></pre></td></tr></table></div></div><h3 id=本地测试>本地测试</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 默认地址为http://localhost:1313, 运行环境为development</span>
+</span></span><span class=line><span class=cl>hugo serve
+</span></span><span class=line><span class=cl><span class=c1># 在服务器上可能无法正确访问localhost,因为默认bind的是127.0.0.1, 只允许本地访问。</span>
+</span></span><span class=line><span class=cl><span class=c1># 可使用 --bind 绑定0.0.0.0, --baseURL 指定地址为127.0.0.1即可正常访问。</span>
+</span></span><span class=line><span class=cl><span class=c1># 使用 -e 指定当前环境。</span>
+</span></span><span class=line><span class=cl><span class=c1># -w 参数可实时监控文件变化，用于调试。</span>
+</span></span><span class=line><span class=cl><span class=c1># --buildDrafts可显示标记为草稿的文章。</span>
+</span></span><span class=line><span class=cl>hugo server -w -e production --buildDrafts --bind<span class=o>=</span><span class=s2>&#34;0.0.0.0&#34;</span> --baseURL<span class=o>=</span>http://127.0.0.1:1313/
+</span></span></code></pre></td></tr></table></div></div><h3 id=编译发布>编译发布</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>HUGO_ENV</span><span class=o>=</span>production hugo --gc --minify
+</span></span></code></pre></td></tr></table></div></div><p>生成public文件夹。注意，<code>draft：true</code>的文章不会在public中生成，因为它还是草稿，不会被编译。</p><h2 id=使用algolia搜索进行博客内容搜索>使用algolia搜索进行博客内容搜索</h2><p>以<code>LoveIt</code>主题的<code>algolia</code>为例</p><ol><li>注册algolia</li></ol><ul><li>前往<a class=link href=https://www.algolia.com/ target=_blank rel=noopener>algolia官网</a>注册一个账号</li><li>创建一个应用
+<img src=https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/08547630b8b8f.png loading=lazy alt=创建应用>
+国内建议选择香港节点</li><li>创建一个索引
+<img src=https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/5daeb634ac9b2.png loading=lazy alt=创建索引></li><li>查看key
+<img src=https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/18166ceeec8d4.png loading=lazy alt=查看key></li></ul><ol start=2><li>安装algolia</li></ol><p>使用npm下载安装atomic-algolia，该工具可对索引进行更新</p><p>npm的安装可查看<a class=link href=https://jklash.com/p/linux%E4%B8%8Bnode.js%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/ target=_blank rel=noopener>Linux下node.js安装配置</a></p><p><code>npm install atomic-algolia --save</code></p><ol start=3><li>修改<code>config.toml</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=p>[</span><span class=nx>params</span><span class=p>.</span><span class=nx>search</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=nx>enable</span> <span class=p>=</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>    <span class=c># 搜索引擎的类型 (&#34;lunr&#34;, &#34;algolia&#34;)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>type</span> <span class=p>=</span> <span class=s2>&#34;algolia&#34;</span> <span class=c># 选择algolia</span>
+</span></span><span class=line><span class=cl>    <span class=c># 文章内容最长索引长度</span>
+</span></span><span class=line><span class=cl>    <span class=nx>contentLength</span> <span class=p>=</span> <span class=mi>4000</span>
+</span></span><span class=line><span class=cl>    <span class=c># 搜索框的占位提示语</span>
+</span></span><span class=line><span class=cl>    <span class=nx>placeholder</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c># 最大结果数目</span>
+</span></span><span class=line><span class=cl>    <span class=nx>maxResultLength</span> <span class=p>=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>    <span class=c># 结果内容片段长度</span>
+</span></span><span class=line><span class=cl>    <span class=nx>snippetLength</span> <span class=p>=</span> <span class=mi>50</span>
+</span></span><span class=line><span class=cl>    <span class=c># 搜索结果中高亮部分的 HTML 标签</span>
+</span></span><span class=line><span class=cl>    <span class=nx>highlightTag</span> <span class=p>=</span> <span class=s2>&#34;em&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c># 是否在搜索索引中使用基于 baseURL 的绝对路径</span>
+</span></span><span class=line><span class=cl>    <span class=nx>absoluteURL</span> <span class=p>=</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=nx>params</span><span class=p>.</span><span class=nx>search</span><span class=p>.</span><span class=nx>algolia</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>          <span class=nx>index</span> <span class=p>=</span> <span class=s2>&#34;blog&#34;</span> <span class=c># 索引名称</span>
+</span></span><span class=line><span class=cl>          <span class=nx>appID</span> <span class=p>=</span> <span class=s2>&#34;HOVR91USRQ&#34;</span> <span class=c># 应用ID</span>
+</span></span><span class=line><span class=cl>          <span class=nx>searchKey</span> <span class=p>=</span> <span class=s2>&#34;xxx&#34;</span> <span class=c># algolia搜索api的key</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 注意设置outputs，不然index.json不会生成</span>
+</span></span><span class=line><span class=cl><span class=c># Options to make hugo output files</span>
+</span></span><span class=line><span class=cl><span class=c># 用于 Hugo 输出文档的设置</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>outputs</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>home</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;HTML&#34;</span><span class=p>,</span> <span class=s2>&#34;RSS&#34;</span><span class=p>,</span> <span class=s2>&#34;JSON&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>page</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;HTML&#34;</span><span class=p>,</span> <span class=s2>&#34;MarkDown&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>section</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;HTML&#34;</span><span class=p>,</span> <span class=s2>&#34;RSS&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>taxonomy</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;HTML&#34;</span><span class=p>,</span> <span class=s2>&#34;RSS&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=nx>taxonomyTerm</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;HTML&#34;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>配置
+创建.env文件</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ALGOLIA_APP_ID=HOVR91USRQ
+</span></span><span class=line><span class=cl>ALGOLIA_INDEX_NAME=blog
+</span></span><span class=line><span class=cl>ALGOLIA_INDEX_FILE=public/index.json
+</span></span><span class=line><span class=cl>ALGOLIA_ADMIN_KEY=xxx # algolia管理员的key
+</span></span></code></pre></td></tr></table></div></div><p>运行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>npm init <span class=c1># 一直回车即可，也可自定义参数</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>运行atomic-algolia</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 在 public 生成 index.json</span>
+</span></span><span class=line><span class=cl>hugo
+</span></span><span class=line><span class=cl><span class=c1># 同步到 algolia, 如果报错提示缺少包，则运行 npm install 安装缺少的包</span>
+</span></span><span class=line><span class=cl>npm run algolia
+</span></span><span class=line><span class=cl><span class=c1># 同步完成可在algolia看到索引</span>
+</span></span></code></pre></td></tr></table></div></div><p>此时搜索功能已配置完成，可正常使用</p><h2 id=hugo-theme-stack主题美化>hugo-theme-stack主题美化</h2><h3 id=添加回到顶部按钮>添加回到顶部按钮</h3><p>编辑主题目录下layouts/_default/single.html</p><p>找到</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=p>{{</span> <span class=nx>define</span> <span class=s2>&#34;main&#34;</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=nx>partial</span> <span class=s2>&#34;article/article.html&#34;</span> <span class=p>.</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=k>if</span> <span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>links</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>        <span class=p>{{</span> <span class=nx>partial</span> <span class=s2>&#34;article/components/links&#34;</span> <span class=p>.</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=nx>end</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=nx>partial</span> <span class=s2>&#34;article/components/related-contents&#34;</span> <span class=p>.</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>   
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=k>if</span> <span class=nx>not</span> <span class=p>(</span><span class=nx>eq</span> <span class=p>.</span><span class=nx>Params</span><span class=p>.</span><span class=nx>comments</span> <span class=kc>false</span><span class=p>)</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>        <span class=p>{{</span> <span class=nx>partial</span> <span class=s2>&#34;comments/include&#34;</span> <span class=p>.</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=nx>end</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=nx>partialCached</span> <span class=s2>&#34;footer/footer&#34;</span> <span class=p>.</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>{{</span> <span class=nx>partialCached</span> <span class=s2>&#34;article/components/photoswipe&#34;</span> <span class=p>.</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl><span class=p>{{</span> <span class=nx>end</span> <span class=p>}}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>&lt;span class="ne-text">{{ partialCached "article/components/photoswipe" . }}&lt;/span></code>后添加</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;backTop&#34;</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;backTopFunction()&#34;</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;right: 40px; bottom: 40px; display: flex;&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>svg</span> <span class=na>xmlns</span><span class=o>=</span><span class=s>&#34;http://www.w3.org/2000/svg&#34;</span> <span class=na>height</span><span class=o>=</span><span class=s>&#34;30&#34;</span> <span class=na>width</span><span class=o>=</span><span class=s>&#34;20&#34;</span> <span class=na>viewBox</span><span class=o>=</span><span class=s>&#34;0 0 512 512&#34;</span><span class=p>&gt;&lt;</span><span class=nt>title</span><span class=p>&gt;</span>Caret Up<span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>path</span> <span class=na>d</span><span class=o>=</span><span class=s>&#34;M414 321.94L274.22 158.82a24 24 0 00-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z&#34;</span> <span class=na>fill</span><span class=o>=</span><span class=s>&#34;#adb5bd&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>path</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>svg</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>style</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/css&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>#</span><span class=nn>backTop</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>position</span><span class=p>:</span> <span class=kc>fixed</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>background-color</span><span class=p>:</span> <span class=mh>#fff</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>width</span><span class=p>:</span> <span class=mi>40</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>height</span><span class=p>:</span> <span class=mi>40</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>border-radius</span><span class=p>:</span> <span class=mi>50</span><span class=kt>%</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>display</span><span class=p>:</span> <span class=kc>none</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>align-items</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>justify-content</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>box-shadow</span><span class=p>:</span> <span class=mi>0</span> <span class=mi>0</span> <span class=mi>6</span><span class=kt>px</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mf>.12</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>cursor</span><span class=p>:</span> <span class=kc>pointer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>z-index</span><span class=p>:</span> <span class=mi>5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=p>#</span><span class=nn>backTop</span><span class=p>:</span><span class=nd>hover</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>background-color</span><span class=p>:</span> <span class=mh>#f1f4f8</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nb>window</span><span class=p>.</span><span class=nx>onscroll</span> <span class=o>=</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span><span class=nx>scrollFunction</span><span class=p>()};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kd>function</span> <span class=nx>scrollFunction</span><span class=p>()</span> <span class=p>{</span><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=mi>121</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>scrollTop</span> <span class=o>&gt;</span> <span class=mi>20</span> <span class=o>||</span> <span class=nb>document</span><span class=p>.</span><span class=nx>documentElement</span><span class=p>.</span><span class=nx>scrollTop</span> <span class=o>&gt;</span> <span class=mi>20</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;backTop&#34;</span><span class=p>).</span><span class=nx>style</span><span class=p>.</span><span class=nx>display</span> <span class=o>=</span> <span class=s2>&#34;flex&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;backTop&#34;</span><span class=p>).</span><span class=nx>style</span><span class=p>.</span><span class=nx>display</span> <span class=o>=</span> <span class=s2>&#34;none&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kd>function</span> <span class=nx>backTopFunction</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>scrollTop</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=nb>document</span><span class=p>.</span><span class=nx>documentElement</span><span class=p>.</span><span class=nx>scrollTop</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=加载动画>加载动画</h3><p>在博客根目录新建layouts/partials/footer目录，在该目录下新建custom.html文件，将下面内容复制进去</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=o>&lt;</span><span class=nx>script</span>
+</span></span><span class=line><span class=cl>    <span class=nx>src</span><span class=o>=</span><span class=s2>&#34;https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/js/nprogress.min.js&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>integrity</span><span class=o>=</span><span class=s2>&#34;sha384-bHDlAEUFxsRI7JfULv3DTpL2IXbbgn4JHQJibgo5iiXSK6Iu8muwqHANhun74Cqg&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>crossorigin</span><span class=o>=</span><span class=s2>&#34;anonymous&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&lt;</span><span class=err>/script&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=nx>link</span>
+</span></span><span class=line><span class=cl>    <span class=nx>rel</span><span class=o>=</span><span class=s2>&#34;stylesheet&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>href</span><span class=o>=</span><span class=s2>&#34;https://cdn.jsdelivr.net/gh/zhixuan2333/gh-blog@v0.1.0/css/nprogress.css&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>integrity</span><span class=o>=</span><span class=s2>&#34;sha384-KJyhr2syt5+4M9Pz5dipCvTrtvOmLk/olWVdfhAp858UCa64Ia5GFpTN7+G4BWpE&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>crossorigin</span><span class=o>=</span><span class=s2>&#34;anonymous&#34;</span>
+</span></span><span class=line><span class=cl><span class=err>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=nx>script</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>NProgress</span><span class=p>.</span><span class=nx>start</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=nb>document</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s2>&#34;readystatechange&#34;</span><span class=p>,</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>readyState</span> <span class=o>===</span> <span class=s2>&#34;interactive&#34;</span><span class=p>)</span> <span class=nx>NProgress</span><span class=p>.</span><span class=nx>inc</span><span class=p>(</span><span class=mf>0.8</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>readyState</span> <span class=o>===</span> <span class=s2>&#34;complete&#34;</span><span class=p>)</span> <span class=nx>NProgress</span><span class=p>.</span><span class=nx>done</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=err>/script&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=美化滚动条>美化滚动条</h3><p>在博客根目录下新建assets/scss目录，在该目录下新建文件custom.scss，将下面内容复制进去</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-scss data-lang=scss><span class=line><span class=cl><span class=nt>html</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nd>::-webkit-scrollbar</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=na>width</span><span class=o>:</span> <span class=mi>20</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=nd>::-webkit-scrollbar-track</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=na>background-color</span><span class=o>:</span> <span class=ni>transparent</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=nd>::-webkit-scrollbar-thumb</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=na>background-color</span><span class=o>:</span> <span class=mh>#d6dee1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=na>border-radius</span><span class=o>:</span> <span class=mi>20</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=na>border</span><span class=o>:</span> <span class=mi>6</span><span class=kt>px</span> <span class=ni>solid</span> <span class=ni>transparent</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=na>background-clip</span><span class=o>:</span> <span class=ni>content-box</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=nd>::-webkit-scrollbar-thumb:hover</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=na>background-color</span><span class=o>:</span> <span class=mh>#a8bbbf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=使用github-action自动发布>使用GitHub Action自动发布</h2><p>博客根目录下新建.github/workflows/main.yml, 输入以下内容</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hugo Blog</span><span class=w> </span><span class=c># 自动化部署 Hugo 博客</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w> </span><span class=c># 触发条件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>master </span><span class=w> </span><span class=c># 推送到 master 分支</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>release</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>types</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>published</span><span class=w> </span><span class=c># 推送新版本号</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>workflow_dispatch</span><span class=p>:</span><span class=w> </span><span class=c># 手动触发</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w> </span><span class=c># 使用Ubuntu最新版作为环境</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w> </span><span class=c># Checkout仓库</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w> </span><span class=c># 使用预编译的 Hugo 二进制文件</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2.5.0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;latest&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w> </span><span class=c># 使用 Hugo-extended 版本，不想使用extended版本选择false即可</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup algolia</span><span class=w> </span><span class=c># 使用 npm 安装 algolia</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>        npm install atomic-algolia --save</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Get username.github.io</span><span class=w> </span><span class=c># 获取 username.github.io 以保持 commit 记录</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>        git clone --no-checkout https://github.com/jklash1996/jklash1996.github.io.git public</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w> </span><span class=c># hugo编译完后，生成 index.json， 同步到 algolia</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>        HUGO_ENV=production hugo --gc --minify 
+</span></span></span><span class=line><span class=cl><span class=sd>        npm run algolia</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy to server</span><span class=w> </span><span class=c># 使用rsync部署到云服务器，可选</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>easingthemes/ssh-deploy@v2.1.5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>ARGS</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;-avz --delete&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>SOURCE</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;public/&#34;</span><span class=w> </span><span class=c># 要同步到服务器的目录</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>REMOTE_HOST</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.SSH_HOST}}</span><span class=w> </span><span class=c># 服务器 IP 地址</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>REMOTE_USER</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.SSH_USER}}</span><span class=w> </span><span class=c># 服务器 SSH 连接用户名</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>REMOTE_PORT</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.SSH_PORT}}</span><span class=w> </span><span class=c># 服务器 SSH 端口</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>SSH_PRIVATE_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.SSH_KEY}}</span><span class=w> </span><span class=c># 配置在服务器上公钥所对应的私钥</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>TARGET</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.WEBSITE_PATH}}</span><span class=w> </span><span class=c># 服务器上对应网站的根目录</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Publish</span><span class=w> </span><span class=c># 将生成出的站点推向 username.github.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>USER</span><span class=p>:</span><span class=w> </span><span class=l>username</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>EMAIL</span><span class=p>:</span><span class=w> </span><span class=l>email</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>GH_REF</span><span class=p>:</span><span class=w> </span><span class=l>github.com/username/username.github.io.git</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>GH_TOKEN</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GH_TOKEN }}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span></span></span><span class=line><span class=cl><span class=sd>        cd public
+</span></span></span><span class=line><span class=cl><span class=sd>        git config --global user.name &#34;$USER&#34;
+</span></span></span><span class=line><span class=cl><span class=sd>        git config --global user.email &#34;$EMAIL&#34;
+</span></span></span><span class=line><span class=cl><span class=sd>        export TZ=&#39;Asia/Shanghai&#39;
+</span></span></span><span class=line><span class=cl><span class=sd>        git add .
+</span></span></span><span class=line><span class=cl><span class=sd>        git commit --allow-empty -m &#34;Auto Update: `date +&#39;%Y-%m-%d %H:%M:%S&#39;`&#34;
+</span></span></span><span class=line><span class=cl><span class=sd>        git push &#34;https://$USER:$GH_TOKEN@$GH_REF&#34; master:master</span><span class=w>        
+</span></span></span></code></pre></td></tr></table></div></div><p>secrets可在源码仓库Settings中设置, 以保护你的信息不被泄露</p><p><img src=https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2022/04/09/62505e8b74910.png loading=lazy alt=设置secrets></p></section><footer class=article-footer><section class=article-tags><a href=/tags/blog/>Blog</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 Jan 01, 2023 00:00 UTC</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/hexo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>Hexo搭建指南</h2></div></a></article><article><a href=/p/c%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/><div class=article-details><h2 class=article-title>C语言单元测试</h2></div></a></article><article><a href=/p/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><div class=article-details><h2 class=article-title>Docker学习笔记</h2></div></a></article><article><a href=/p/kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><div class=article-details><h2 class=article-title>Kubernetes学习笔记</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2024 月胧明</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

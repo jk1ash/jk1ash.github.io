@@ -1,0 +1,259 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="汇总k8s学习过程中的笔记\n"><title>Kubernetes学习笔记</title>
+<link rel=canonical href=https://blog.jklash.com/p/kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="Kubernetes学习笔记"><meta property='og:description' content="汇总k8s学习过程中的笔记\n"><meta property='og:url' content='https://blog.jklash.com/p/kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'><meta property='og:site_name' content='月胧明'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Linux'><meta property='article:published_time' content='2023-01-01T00:00:00+00:00'><meta property='article:modified_time' content='2023-01-01T00:00:00+00:00'><meta name=twitter:title content="Kubernetes学习笔记"><meta name=twitter:description content="汇总k8s学习过程中的笔记\n"><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu4410300129322454102.png width=300 height=301 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🌙</span></figure><div class=site-meta><h1 class=site-name><a href=/>月胧明</a></h1><h2 class=site-description>月明星稀，乌鹊南飞</h2></div></header><ol class=menu-social><li><a href=https://github.com/jk1ash target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#基本概念>基本概念</a><ol><li><a href=#名词解释>名词解释</a></li><li><a href=#网络模型>网络模型</a></li></ol></li><li><a href=#k8s架构>k8s架构</a><ol><li><a href=#master>master</a></li><li><a href=#node>node</a></li></ol></li><li><a href=#安装>安装</a><ol><li><a href=#关闭swap>关闭swap</a></li><li><a href=#安装kubeadm-kubeadm-kubectl国内源>安装kubeadm kubeadm kubectl（国内源）</a></li><li><a href=#下载k8s镜像国内源>下载k8s镜像（国内源）</a></li></ol></li><li><a href=#部署>部署</a><ol><li><a href=#初始化master>初始化Master</a></li><li><a href=#配置kubectl>配置kubectl</a><ol><li><a href=#kubectl常用命令>kubectl常用命令</a></li></ol></li><li><a href=#部署flannel>部署flannel</a></li><li><a href=#子节点加入master>子节点加入Master</a></li><li><a href=#删除节点>删除节点</a></li></ol></li><li><a href=#运行应用>运行应用</a><ol><li><a href=#命令运行>命令运行</a></li><li><a href=#配置运行>配置运行</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/2023/>2023</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>Kubernetes学习笔记</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 01, 2023</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><p>汇总k8s学习过程中的笔记</p><h2 id=基本概念>基本概念</h2><h3 id=名词解释>名词解释</h3><p><strong>Cluster</strong></p><p>Cluster 是计算、存储和网络资源的集合，Kubernetes利用这些资源运行各种基于容器的应用。</p><p><strong>Master</strong></p><p>Master 是 Cluster 的大脑，它的主要职责是调度，即决定将应用放在哪里运行。Master 运行 Linux 操作系统，可以是物理机或者虚拟机。为了实现高可用，可以运行多个 Master。</p><p><strong>Node</strong></p><p>Node 的职责是运行容器应用。Node 由 Master 管理，Node 负责监控并汇报容器的状态，并根据 Master 的要求管理容器的生命周期。Node 运行在 Linux 操作系统，可以是物理机或者是虚拟机。</p><p><strong>Pod</strong></p><p>Pod 是 Kubernetes 的最小工作单元。每个 Pod 包含一个或多个容器。Pod 中的容器会作为一个整体被 Master 调度到一个 Node 上运行。</p><p>Kubernetes 引入 Pod 主要基于下面两个目的：</p><ol><li>可管理性</li></ol><p>有些容器天生就是需要紧密联系，一起工作。Pod 提供了比容器更高层次的抽象，将它们封装到一个部署单元中。Kubernetes 以 Pod 为最小单位进行调度、扩展、共享资源、管理生命周期。</p><ol start=2><li>通信和资源共享。</li></ol><p>Pod 中的所有容器使用同一个网络 namespace，即相同的 IP 地址和 Port 空间。它们可以直接用 localhost 通信。同样的，这些容器可以共享存储，当 Kubernetes 挂载 volume 到 Pod，本质上是将 volume 挂载到 Pod 中的每一个容器。</p><p>Pods 有两种使用方式：</p><ol><li>运行单一容器。
+one-container-per-Pod 是 Kubernetes 最常见的模型，这种情况下，只是将单个容器简单封装成 Pod。即便是只有一个容器，Kubernetes 管理的也是 Pod 而不是直接管理容器。</li><li>运行多个容器。
+但问题在于：哪些容器应该放到一个 Pod 中？
+答案是：这些容器联系必须 非常紧密，而且需要 直接共享资源。</li></ol><p><strong>Controller</strong></p><p>Kubernetes 通常不会直接创建 Pod，而是通过 Controller 来管理 Pod 的。Controller 中定义了 Pod 的部署特性，比如有几个副本，在什么样的 Node 上运行等。为了满足不同的业务场景，Kubernetes 提供了多种 Controller，包括 Deployment、ReplicaSet、DaemonSet、StatefuleSet、Job 等。</p><ol><li>Deployment</li></ol><p>是最常用的 Controller，Deployment 可以管理 Pod 的多个副本，并确保 Pod 按照期望的状态运行。</p><ol start=2><li>ReplicaSet</li></ol><p>实现了 Pod 的多副本管理。使用 Deployment 时会自动创建 ReplicaSet，也就是说 Deployment 是通过 ReplicaSet 来管理 Pod 的多个副本，我们通常不需要直接使用 ReplicaSet。</p><ol start=3><li>DaemonSet</li></ol><p>用于每个 Node 最多只运行一个 Pod 副本的场景。正如其名称所揭示的，DaemonSet 通常用于运行 daemon。</p><ol start=4><li>StatefuleSet</li></ol><p>能够保证 Pod 的每个副本在整个生命周期中名称是不变的。而其他 Controller 不提供这个功能，当某个 Pod 发生故障需要删除并重新启动时，Pod 的名称会发生变化。同时 StatefuleSet 会保证副本按照固定的顺序启动、更新或者删除。</p><ol start=5><li>Job</li></ol><p>用于运行结束就删除的应用。而其他 Controller 中的 Pod 通常是长期持续运行。</p><p><strong>Service</strong></p><p>Kubernetes Service 定义了外界访问一组特定 Pod 的方式。Service 有自己的 IP 和端口，Service 为 Pod 提供了负载均衡。</p><p>Kubernetes 运行容器（Pod）与访问容器（Pod）这两项任务分别由 Controller 和 Service 执行。</p><p><strong>Namespace</strong></p><p>Namespace 可以将一个物理的 Cluster 逻辑上划分成多个虚拟 Cluster，每个 Cluster 就是一个 Namespace。不同 Namespace 里的资源是完全隔离的。</p><p>Kubernetes 默认创建了两个 Namespace。</p><ul><li>default &ndash; 创建资源时如果不指定，将被放到这个 Namespace 中。</li><li>kube-system &ndash; Kubernetes 自己创建的系统资源将放到这个 Namespace 中。</li></ul><h3 id=网络模型>网络模型</h3><p>为了保证网络方案的标准化、扩展性和灵活性，Kubernetes 采用了 Container Networking Interface（CNI）规范。</p><p>CNI 是由 CoreOS 提出的容器网络规范，它使用了插件（Plugin）模型创建容器的网络栈。</p><p>目前已有多种支持 Kubernetes 的网络方案，比如 Flannel、Calico、Canal、Weave Net 等。因为它们都实现了 CNI 规范，用户无论选择哪种方案，得到的网络模型都一样，即每个 Pod 都有独立的 IP，可以直接通信。区别在于不同方案的底层实现不同。</p><h2 id=k8s架构>k8s架构</h2><p><strong>架构图：</strong></p><p><img src=https://image-hosts-1305019894.cos.accelerate.myqcloud.com/2021/08/04/cf0185e7a78b7.jpg loading=lazy alt=image></p><h3 id=master>master</h3><blockquote><p>Master 是 Kubernetes Cluster 的大脑，运行着如下 Daemon 服务：kube-apiserver、kube-scheduler、kube-controller-manager、etcd 和 Pod 网络（例如 flannel）。</p></blockquote><p><strong>API Server（kube-apiserver）</strong></p><p>API Server 提供 HTTP/HTTPS RESTful API，即 Kubernetes API。API Server 是 Kubernetes Cluster 的前端接口，各种客户端工具（CLI 或 UI）以及 Kubernetes 其他组件可以通过它管理 Cluster 的各种资源。</p><p><strong>Scheduler（kube-scheduler）</strong></p><p>Scheduler 负责决定将 Pod 放在哪个 Node 上运行。Scheduler 在调度时会充分考虑 Cluster 的拓扑结构，当前各个节点的负载，以及应用对高可用、性能、数据亲和性的需求。</p><p><strong>Controller Manager（kube-controller-manager）</strong></p><p>Controller Manager 负责管理 Cluster 各种资源，保证资源处于预期的状态。Controller Manager 由多种 controller 组成，包括 replication controller、endpoints controller、namespace controller、serviceaccounts controller 等。</p><p>不同的 controller 管理不同的资源。例如 replication controller 管理 Deployment、StatefulSet、DaemonSet 的生命周期，namespace controller 管理 Namespace 资源。</p><p><strong>etcd</strong></p><p>etcd 负责保存 Kubernetes Cluster 的配置信息和各种资源的状态信息。当数据发生变化时，etcd 会快速地通知 Kubernetes 相关组件。</p><p><strong>Pod 网络</strong></p><p>Pod 要能够相互通信，Kubernetes Cluster 必须部署 Pod 网络，flannel 是其中一个可选方案。</p><h3 id=node>node</h3><blockquote><p>Node 是 Pod 运行的地方，Kubernetes 支持 Docker、rkt 等容器 Runtime。 Node上运行的 Kubernetes 组件有 kubelet、kube-proxy 和 Pod 网络（例如 flannel）。</p></blockquote><p><strong>kubelet</strong></p><p>kubelet 是 Node 的 agent，当 Scheduler 确定在某个 Node 上运行 Pod 后，会将 Pod 的具体配置信息（image、volume 等）发送给该节点的 kubelet，kubelet 根据这些信息创建和运行容器，并向 Master 报告运行状态。</p><p><strong>kube-proxy</strong></p><p>service 在逻辑上代表了后端的多个 Pod，外界通过 service 访问 Pod。service 接收到的请求是如何转发到 Pod 的呢？这就是 kube-proxy 要完成的工作。</p><p>每个 Node 都会运行 kube-proxy 服务，它负责将访问 service 的 TCP/UPD 数据流转发到后端的容器。如果有多个副本，kube-proxy 会实现负载均衡。</p><p><strong>Pod 网络</strong></p><p>Pod 要能够相互通信，Kubernetes Cluster 必须部署 Pod 网络，flannel 是其中一个可选方案。</p><h2 id=安装>安装</h2><h3 id=关闭swap>关闭swap</h3><p>临时关闭</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo swapoff -a
+</span></span></code></pre></td></tr></table></div></div><p>永久关闭</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo vim /etc/fstab
+</span></span><span class=line><span class=cl><span class=c1>## 注释</span>
+</span></span><span class=line><span class=cl><span class=c1>#/swap.img      none    swap    sw      0       0</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=安装kubeadm-kubeadm-kubectl国内源>安装kubeadm kubeadm kubectl（国内源）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get install -y ca-certificates curl 
+</span></span><span class=line><span class=cl>curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add -
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main&#34;</span> &gt; /etc/apt/sources.list.d/kubernetes.list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo apt-get update <span class=o>&amp;&amp;</span> apt-get install -y kubelet kubeadm kubectl
+</span></span><span class=line><span class=cl>sudo apt-mark hold kubelet kubeadm kubectl
+</span></span></code></pre></td></tr></table></div></div><h3 id=下载k8s镜像国内源>下载k8s镜像（国内源）</h3><p>使用脚本一键下载并更名</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=cp>#!/usr/bin/env bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl>docker image pull <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.8.0&#34;</span>
+</span></span><span class=line><span class=cl>docker image tag <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.8.0&#34;</span>
+</span></span><span class=line><span class=cl>docker image rmi <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.8.0&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> IT in etcd:3.4.13-0 pause:3.4.1 kube-proxy:v1.21.3 kube-scheduler:v1.21.3 kube-controller-manager:v1.21.3 kube-apiserver:v1.21.3
+</span></span><span class=line><span class=cl><span class=k>do</span>
+</span></span><span class=line><span class=cl>    docker image pull <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/</span><span class=nv>$IT</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    docker image tag  <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/</span><span class=nv>$IT</span><span class=s2>&#34;</span> <span class=s2>&#34;k8s.gcr.io/</span><span class=nv>$IT</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    docker image rmi  <span class=s2>&#34;registry.cn-hangzhou.aliyuncs.com/google_containers/</span><span class=nv>$IT</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>done</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=部署>部署</h2><h3 id=初始化master>初始化Master</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubeadm init --apiserver-advertise-address <span class=o>[</span>k8s-master ip<span class=o>]</span> --pod-network-cidr<span class=o>=</span>10.244.0.0/16
+</span></span></code></pre></td></tr></table></div></div><p><strong>过程：</strong></p><ol><li>kubeadm 执行初始化前的检查。</li><li>生成 token 和证书。</li><li>生成 KubeConfig 文件，kubelet 需要这个文件与 Master 通信。</li><li>安装 Master 组件，会从 goolge 的 Registry 下载组件的 Docker 镜像，这一步可能会花一些时间，主要取决于网络质量。</li><li>安装附加组件 kube-proxy 和 kube-dns。</li><li>Kubernetes Master 初始化成功。</li><li>提示如何配置 kubectl。</li><li>提示如何安装 Pod 网络。</li><li>提示如何注册其他节点到 Cluster。</li></ol><h3 id=配置kubectl>配置kubectl</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>mkdir -p <span class=nv>$HOME</span>/.kubesudo 
+</span></span><span class=line><span class=cl>cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/configsudo 
+</span></span><span class=line><span class=cl>chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 命令补全</span>
+</span></span><span class=line><span class=cl>apt-get -y install bash-completion
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;source &lt;(kubectl completion bash)&#34;</span> &gt;&gt; ~/.bashrc
+</span></span></code></pre></td></tr></table></div></div><h4 id=kubectl常用命令>kubectl常用命令</h4><p><strong>logs：查看POD或容器的日志</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#查看POD中所有容器的日志</span>
+</span></span><span class=line><span class=cl>kubectl logs nginxpod
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#查看POD中指定容器的日志</span>
+</span></span><span class=line><span class=cl>kubectl logs nginxpod -c nginx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#查看指定名称空间中的POD中的指定容器日志</span>
+</span></span><span class=line><span class=cl>kubectl logs -n <span class=nb>test</span> mysqlpod -c mysql
+</span></span></code></pre></td></tr></table></div></div><p><strong>describe：显示资源运行状态信息</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl describe pod &lt;Pod Name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#查看指定名称空间的POD</span>
+</span></span><span class=line><span class=cl>kubectl describe pods nginxpod
+</span></span><span class=line><span class=cl>kubectl describe pods mysql -n <span class=nb>test</span>
+</span></span><span class=line><span class=cl>kubectl describe pod kube-flannel-ds-v0p3x --namespace<span class=o>=</span>kube-system
+</span></span></code></pre></td></tr></table></div></div><p><strong>exec：在POD中执行命令</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#此方式只适用于POD只有一个容器时</span>
+</span></span><span class=line><span class=cl>kubectl <span class=nb>exec</span> -it nginxpod -- /bin/bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#如POD中有多个容器需要使用-c选项指定容器</span>
+</span></span><span class=line><span class=cl>kubectl <span class=nb>exec</span> -it nginxpod -c nginx -- /bin/bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#一次性执行多个命令或使用管道符</span>
+</span></span><span class=line><span class=cl>kubectl <span class=nb>exec</span> nfs -- sh -c <span class=s2>&#34;echo &#39;SET testkey www.linux321.com&#39; | redis-cli&#34;</span>
+</span></span><span class=line><span class=cl>kubectl <span class=nb>exec</span> nfs -- sh -c <span class=s2>&#34;echo &#39;GET testkey&#39; | redis-cli&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看资源类型</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl api-resouurce
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看名称空间</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl get namespaces
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看节点状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#在master上执行</span>
+</span></span><span class=line><span class=cl> kubectl get nodes
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看pod状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl get pod --all-namespaces
+</span></span><span class=line><span class=cl>kubectl get po -A
+</span></span></code></pre></td></tr></table></div></div><h3 id=部署flannel>部署flannel</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+</span></span></code></pre></td></tr></table></div></div><p>国内镜像仓库手动下载flannel</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>docker pull registry.cn-hangzhou.aliyuncs.com/k8sos/flannel:v0.14.0
+</span></span></code></pre></td></tr></table></div></div><h3 id=子节点加入master>子节点加入Master</h3><p><strong>查看现有token</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubeadm token list
+</span></span></code></pre></td></tr></table></div></div><p><strong>生成一个新token</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubeadm token create --print-join-command
+</span></span><span class=line><span class=cl><span class=c1># 默认有效期24小时,若想久一些可以结合--ttl参数,设为0则用不过期</span>
+</span></span><span class=line><span class=cl>kubeadm token create --ttl <span class=m>0</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看ca证书的hash</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt <span class=p>|</span> openssl rsa -pubin -outform der 2&gt;/dev/null <span class=p>|</span> openssl dgst -sha256 -hex <span class=p>|</span> sed <span class=s1>&#39;s/^.* //&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>node加入Master</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubeadm join <span class=o>[</span>k8s-master ip<span class=o>]</span>:6443 --token <span class=o>[</span>token<span class=o>]</span> --discovery-token-ca-cert-hash <span class=o>[</span>ca cert<span class=o>]</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>子节点需要的镜像</strong></p><ul><li>flannel</li><li>pause</li><li>k8s-proxy</li></ul><p><strong>查看节点状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1>#在master上执行</span>
+</span></span><span class=line><span class=cl>kubectl get nodes
+</span></span><span class=line><span class=cl><span class=c1>#都处于ready状态，说明node节点已可用</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看pod状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl get pod --all-namespaces
+</span></span><span class=line><span class=cl>kubectl get po -A
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看pod运行情况</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl describe pod kube-flannel-ds-v0p3x --namespace<span class=o>=</span>kube-system
+</span></span><span class=line><span class=cl><span class=c1>#如果镜像已经都下载好还没处于ready状态，可尝试重启容器服务systemctl restart docker</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=删除节点>删除节点</h3><p>应首先清空节点并确保该节点为空， 然后取消配置该节点。</p><p>使用适当的凭证与控制平面节点通信，运行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl drain &lt;node name&gt; --delete-local-data --force --ignore-daemonsets
+</span></span></code></pre></td></tr></table></div></div><p>在删除节点之前，请重置 kubeadm 安装的状态：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubeadm reset
+</span></span></code></pre></td></tr></table></div></div><p>重置过程不会重置或清除 iptables 规则或 IPVS 表。如果你希望重置 iptables，则必须手动进行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>iptables -F <span class=o>&amp;&amp;</span> iptables -t nat -F <span class=o>&amp;&amp;</span> iptables -t mangle -F <span class=o>&amp;&amp;</span> iptables -X
+</span></span></code></pre></td></tr></table></div></div><p>如果要重置 IPVS 表，则必须运行以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ipvsadm -C
+</span></span></code></pre></td></tr></table></div></div><p>现在删除节点：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl delete node &lt;node name&gt;
+</span></span></code></pre></td></tr></table></div></div><h2 id=运行应用>运行应用</h2><h3 id=命令运行>命令运行</h3><p><strong>创建应用</strong></p><p>master先下载nginx镜像</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl create deployment NAME --image<span class=o>=</span>image -- <span class=o>[</span>COMMAND<span class=o>]</span> <span class=o>[</span>args...<span class=o>]</span> <span class=o>[</span>options<span class=o>]</span>
+</span></span><span class=line><span class=cl>kubectl create deployment nginx --image<span class=o>=</span><span class=s2>&#34;nginx:1.18.0&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1>#或者</span>
+</span></span><span class=line><span class=cl>kubectl run deployment nginx --image<span class=o>=</span><span class=s2>&#34;nginx:1.21.1&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>删除应用</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl delete deployment/nginx
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看pod</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl get pods
+</span></span><span class=line><span class=cl><span class=c1>#查看详细信息</span>
+</span></span><span class=line><span class=cl>kubectl describe pod
+</span></span></code></pre></td></tr></table></div></div><p><strong>删除pod</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl delete pods
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#删除所有POD</span>
+</span></span><span class=line><span class=cl>kubectl delete pods --all
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#删除指定多个POD</span>
+</span></span><span class=line><span class=cl>kubectl delete pods nginxpod demoapp
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看容器调度</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl get pods -o wide
+</span></span></code></pre></td></tr></table></div></div><p><strong>拓展实例</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl scale deployment nginx --replicas<span class=o>=</span><span class=m>3</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>查看ReplicaSet</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl get replicaset
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置运行>配置运行</h3><p><strong>创建Deployment的yml文件</strong></p><p>常用字段：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>apiVersion: apps/v1    <span class=c1># API群组及版本</span>
+</span></span><span class=line><span class=cl>kind: Deployment       <span class=c1># 资源类型特有标识</span>
+</span></span><span class=line><span class=cl>metadata:
+</span></span><span class=line><span class=cl>  name &lt;string&gt;        <span class=c1># 资源名称，在作用域中要唯一</span>
+</span></span><span class=line><span class=cl>  namespace &lt;string&gt;   <span class=c1># 名称空间；Deployment隶属名称空间级别</span>
+</span></span><span class=line><span class=cl>spec:
+</span></span><span class=line><span class=cl>  minReadySeconds &lt;integer&gt;  <span class=c1># Pod就绪后多少秒内任一容器无crash方可视为“就绪”</span>
+</span></span><span class=line><span class=cl>  replicas &lt;integer&gt;         <span class=c1># 期望的Pod副本数，默认为1</span>
+</span></span><span class=line><span class=cl>  selector &lt;object&gt;          <span class=c1># 标签选择器，必须匹配template字段中Pod模板中的标签</span>
+</span></span><span class=line><span class=cl>  template &lt;object&gt;          <span class=c1># Pod模板对象</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  revisionHistoryLimit &lt;integer&gt; <span class=c1># 滚动更新历史记录数量，默认为10</span>
+</span></span><span class=line><span class=cl>  strategy &lt;Object&gt;              <span class=c1># 滚动更新策略</span>
+</span></span><span class=line><span class=cl>    <span class=nb>type</span> &lt;string&gt;                <span class=c1># 滚动更新类型，可用值有Recreate和RollingUpdate；</span>
+</span></span><span class=line><span class=cl>    rollingUpdate &lt;Object&gt;       <span class=c1># 滚动更新参数，专用于RollingUpdate类型</span>
+</span></span><span class=line><span class=cl>      maxSurge &lt;string&gt;          <span class=c1># 更新期间可比期望的Pod数量多出的数量或比例；</span>
+</span></span><span class=line><span class=cl>      maxUnavailable &lt;string&gt;    <span class=c1># 更新期间可比期望的Pod数量缺少的数量或比例，10， </span>
+</span></span><span class=line><span class=cl>  progressDeadlineSeconds &lt;integer&gt;  <span class=c1># 滚动更新故障超时时长，默认为600秒</span>
+</span></span><span class=line><span class=cl>  paused &lt;boolean&gt;                   <span class=c1># 是否暂停部署过程</span>
+</span></span></code></pre></td></tr></table></div></div><p>执行apply命令运行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>kubectl apply -f deployment.yml
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/linux/>Linux</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 Jan 01, 2023 00:00 UTC</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><div class=article-details><h2 class=article-title>Docker学习笔记</h2></div></a></article><article><a href=/p/c%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/><div class=article-details><h2 class=article-title>C语言单元测试</h2></div></a></article><article><a href=/p/hexo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>Hexo搭建指南</h2></div></a></article><article><a href=/p/hugo%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>Hugo搭建指南</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2024 月胧明</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.29.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

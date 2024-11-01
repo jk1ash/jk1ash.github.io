@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C语言 on 月胧明</title><link>https://blog.jklash.com/tags/c%E8%AF%AD%E8%A8%80/</link><description>Recent content in C语言 on 月胧明</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.jklash.com/tags/c%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml"/><item><title>C语言单元测试</title><link>https://blog.jklash.com/p/c%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://blog.jklash.com/p/c%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid><description>&lt;p>&lt;em>CUnit&lt;/em> （&lt;em>单元测试&lt;/em>框架），CUnit是一个用C语言编写、管理和运行单元测试的轻量级系统，它为C程序员提供了具有灵活多样用户界面的基本测试功能。&lt;/p>
+&lt;h2 id="环境安装">环境安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># 普通版本
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt install libcunit1 libcunit1-dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># ncurses版本
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt install libcunit1-ncurses libcunit1-ncurses-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="四种模式输出简介">四种模式输出简介
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;strong>模式&lt;/strong>&lt;/th>
+&lt;th>&lt;strong>平台&lt;/strong>&lt;/th>
+&lt;th>&lt;strong>结果输出方式&lt;/strong>&lt;/th>
+&lt;th>&lt;strong>使用的接口函数&lt;/strong>&lt;/th>
+&lt;th>&lt;strong>介绍&lt;/strong>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Basic&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>所有&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>标准输出&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>#include &amp;ldquo;CUnit/Basic.h&amp;quot;CU_basic_set_mode(CU_BRM_VERBOSE);CU_basic_run_tests();&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>结果输出到标准输出（stdout）&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Automated&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>所有&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>xml文件&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>#include &amp;ldquo;CUnit/Automated.h&amp;quot;CU_set_output_filename(&amp;ldquo;result&amp;rdquo;); CU_list_tests_to_file();CU_automated_run_tests();&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>生成XML文件&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Console&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>所有&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>交互式控制台&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>#include &amp;ldquo;CUnit/Console.h&amp;quot;CU_console_run_tests();&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>比较灵活，可以选择只执行其中某一个测试用例&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Curses&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>Linux/Unix&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>交互式curses窗口&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>#include &amp;ldquo;CUnit/CUCurses.h&amp;quot;CU_curses_run_tests();&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>跟Console类似，只不过是以Curses窗口的方式展示&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>注：Automated模式生成完XML文件之后，然后再将CUnit-List.dtd、CUnit-List.xsl、CUnit-Run.dtd、CUnit-Run.xsl（这几个文件在CUnit的源码包可以找到，在/usr/share/CUnit/目录下）和XML文件放到同一级目录，再用浏览器打开，就可以看到界面了。&lt;/p>
+&lt;h2 id="例子">例子
+&lt;/h2>&lt;h3 id="1添加测试suite">1.添加测试suite
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @description: 测试单元初始化函数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">initializeSuite&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">--- Start CUnit Test ---&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @description: 测试单元释放函数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">finalizeSuite&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">--- Finish CUnit Test ---&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2添加测试用例case">2.添加测试用例case
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//case1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">void&lt;/span> &lt;span class="nf">test_1_1&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/* 断言函数返回是否与预期相同 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">CU_ASSERT_EQUAL_FATAL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nf">sum&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//case2
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">void&lt;/span> &lt;span class="nf">test_1_2&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">CU_ASSERT_EQUAL_FATAL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nf">sub&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="3创建测试模块">3.创建测试模块
+&lt;/h3>&lt;p>&lt;strong>将之前创建的suite和case添加到模块中，可添加多个suite和case。&lt;/strong>
+模块不是必须的，直接将suite和case添加到主函数也可以实现测试。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @description: 构建单元测试套件与用例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @return CU_ErrorCode:cunit错误码
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CU_ErrorCode&lt;/span> &lt;span class="nf">TestModule&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CU_pSuite&lt;/span> &lt;span class="n">pSuite1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pSuite1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">CU_add_suite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Suite1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">initializeSuite&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">finalizeSuite&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//检测注册Suite情况
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">NULL&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">pSuite1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">CU_cleanup_registry&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nf">CU_get_error&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 添加当前套件的测试用例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Test_1-1：用例1-1名 test_1_1：用例函数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">NULL&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nf">CU_add_test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pSuite1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Test_1-1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_1_1&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">CU_cleanup_registry&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nf">CU_get_error&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">NULL&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nf">CU_add_test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pSuite1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Test_1-2&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_1_2&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">CU_cleanup_registry&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nf">CU_get_error&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">CUE_SUCCESS&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="4测试主函数">4.测试主函数
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;CUnit/Basic.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;CUnit/CUnit.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">argc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">argv&lt;/span>&lt;span class="p">[])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 初始化测试注册表
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">CUE_SUCCESS&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nf">CU_initialize_registry&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nf">CU_get_error&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//检测是否在执行
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nf">assert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nf">CU_is_test_running&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//调用测试模块完成测试用例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">CUE_SUCCESS&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nf">TestModule&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">CU_cleanup_registry&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nf">CU_get_error&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 设置运行模式
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="cm">/*** 运行结果产成XML文件的模式********
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> CU_set_output_filename(&amp;#34;result&amp;#34;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> CU_list_tests_to_file();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> CU_automated_run_tests();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> ***********************************/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// CU_console_run_tests(); /* 控制台交互模式 */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// CU_basic_run_tests(); /* 控制台直接输出 */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nf">CU_curses_run_tests&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="cm">/* ncurses交互模式 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//清除注册信息完成单元测试
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nf">CU_cleanup_registry&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">EXIT_SUCCESS&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="cuint断言">CUint断言
+&lt;/h2>&lt;p>以下断言可根据测试选择的不同判断条件来抛出异常，以达到单元测试的目的&lt;/p>
+&lt;p>包含头文件 &lt;code>#include &amp;lt;CUnit/CUnit.h&amp;gt;&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;strong>断言&lt;/strong>&lt;/th>
+&lt;th>&lt;strong>含义&lt;/strong>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT(int expression)CU_ASSERT_FATAL(int expression)CU_TEST(int expression)CU_TEST_FATAL(int expression)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言表达式为TRUE（非零）&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_TRUE(value)CU_ASSERT_TRUE_FATAL(value)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言值为真（非零）&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_FALSE(value)CU_ASSERT_FALSE_FATAL(value)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言值为假（零）&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_EQUAL(actual, expected)CU_ASSERT_EQUAL_FATAL(actual, expected)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言实际值==期望值&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_NOT_EQUAL(actual, expected))CU_ASSERT_NOT_EQUAL_FATAL(actual, expected)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言实际值!=期望值&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_PTR_EQUAL(actual, expected)CU_ASSERT_PTR_EQUAL_FATAL(actual, expected)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言指针实际==期待&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_PTR_NOT_EQUAL(actual, expected)CU_ASSERT_PTR_NOT_EQUAL_FATAL(actual, expected)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言指针实际!=期待&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_PTR_NULL(value)CU_ASSERT_PTR_NULL_FATAL(value)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>指针值==NULL&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_PTR_NOT_NULL(value)CU_ASSERT_PTR_NOT_NULL_FATAL(value)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>指针值!=NULL&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_STRING_EQUAL(actual, expected)CU_ASSERT_STRING_EQUAL_FATAL(actual, expected)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言实际字符串与预期字符串相等&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_STRING_NOT_EQUAL(actual, expected)CU_ASSERT_STRING_NOT_EQUAL_FATAL(actual, expected)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言实际字符串与预期字符串不等&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_NSTRING_EQUAL(actual, expected, count)CU_ASSERT_NSTRING_EQUAL_FATAL(actual, expected, count)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言实际和预期的第一个计数字符相同&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_NSTRING_NOT_EQUAL(actual, expected, count)CU_ASSERT_NSTRING_NOT_EQUAL_FATAL(actual, expected, count)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言实际和预期的第一个计数字符不同&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_DOUBLE_EQUAL(actual, expected, granularity)CU_ASSERT_DOUBLE_EQUAL_FATAL(actual, expected, granularity)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言（实际-预期）&amp;lt;=（粒度） 此断言必须链接到数学库。&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_ASSERT_DOUBLE_NOT_EQUAL(actual, expected, granularity)CU_ASSERT_DOUBLE_NOT_EQUAL_FATAL(actual, expected, granularity)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>断言（实际-预期）&amp;gt;（粒度） 此断言必须链接到数学库。&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_PASS(message)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>用指定的消息注册传递断言。不执行逻辑测试。&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>CU_FAIL(message)CU_FAIL_FATAL(message)&lt;/strong>&lt;/td>
+&lt;td>&lt;strong>用指定的消息注册失败的断言。不执行逻辑测试。&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>
